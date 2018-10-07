@@ -1,8 +1,9 @@
 import traceback
 from flask import jsonify
 import requests
-from csh_quotefault_bot.ldap_utils import resolve_name
 from fuzzywuzzy import fuzz, process
+from csh_quotefault_bot.ldap_utils import resolve_name
+
 
 url = ''
 multiples = []
@@ -54,10 +55,10 @@ def respond(slack_request: str):
         response = requests.get(url + '/all')
         for quote in response:
             ratio = fuzz.ratio(term, quote['quote'])
-            if(ratio > bestMatch):
-                bestMatchQuote = quote['id'];
+            if ratio > bestMatch:
+                bestMatchQuote = quote['id']
         response = requests.get(url + bestMatchQuote)
-        return make_slack_msg(response.json(), false)
+        return make_slack_msg(response.json(), False)
 
 
     args = {}
