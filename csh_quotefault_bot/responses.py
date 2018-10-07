@@ -49,7 +49,10 @@ def respond(slack_request: str):
         params['id'] = message[1]
     if command == 'search':
         #Perform a search with fuzzy string matching
-        term = message[1] + ' ' + message[2]
+        if len(message) >= 2:
+            term = message[1] + ' ' + message[2]
+        else:
+            term = message[1]
         bestMatch = 0
         bestMatchQuote = 1
         response = requests.get(url + '/all')
