@@ -56,7 +56,7 @@ You can set that at https://cshrit.slack.com/account/settings#email'''
 
         if command == 'help':
             return responses.help_msg('')
-        if command in singles + multiples:
+        if command in singles + multiples + 'search':
             return responses.respond(request.form['text'])
         if command == 'submit':
             return responses.submission(request.form['text'], uid)
