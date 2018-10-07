@@ -49,10 +49,10 @@ def respond(slack_request: str):
     if command == 'search':
         #Perform a search with fuzzy string matching
         term = message[1] + ' ' + message[2]
-        bestMatch = 0;
-        bestMatchQuote = 1;
+        bestMatch = 0
+        bestMatchQuote = 1
         response = requests.get(url + '/all')
-        for(quote in response):
+        for quote in response:
             ratio = fuzz.ratio(term, quote['quote'])
             if(ratio > bestMatch):
                 bestMatchQuote = quote['id'];
